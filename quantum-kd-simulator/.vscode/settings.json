@@ -1,0 +1,8 @@
+{
+  "python.analysis.extraPaths": [
+    "/Users/adramendiaye/Documents/dev/lambda_quatum_key_distro/quantum-kd-simulator/src/layers/crypto-layer/python",
+    "/Users/adramendiaye/Documents/dev/lambda_quatum_key_distro/quantum-kd-simulator/src/layers/utilities-layer/python"
+  ],
+  "python.defaultInterpreterPath": "/Users/adramendiaye/Documents/dev/lambda_quatum_key_distro/quantum-kd-simulator/.venv/bin/python",
+  "python.analysis.useLibraryCodeForTypes": true
+}

@@ -1,0 +1,4 @@
+cryptography==41.0.7
+numpy==1.24.3
+scipy==1.11.4
+pycryptodome==3.19.0
