@@ -4,9 +4,9 @@ import secrets
 import os
 import datetime
 import base64
-import numpy as np
 from typing import Dict, List, Tuple, Optional
 
+import numpy as np # Ensure numpy is imported
 from aws_lambda_powertools import Logger, Tracer, Metrics
 from aws_lambda_powertools.utilities.typing import LambdaContext
 from pydantic import BaseModel, Field
@@ -211,7 +211,7 @@ def lambda_handler(event: dict, context: LambdaContext) -> dict:
         )
         
         session_id = secrets.token_hex(16)
-        logger.add_extras(sessionId=session_id) # Add session_id to subsequent logs
+        logger.append_keys(sessionId=session_id) # Add session_id to subsequent logs
 
         # 1. Alice prepares qubits
         alice_bits, alice_bases = protocol.prepare_qubits_alice()
