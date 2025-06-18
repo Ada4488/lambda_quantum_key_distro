@@ -1,6 +1,15 @@
 # Task management file - keep out of version control
 task.md
 
+# Video recording guides and scripts - internal development files
+VIDEO_SCRIPT.md
+EASY_RECORDING_GUIDE.md
+COMPLETE_RECORDING_GUIDE.md
+VIDEO_SLIDES.md
+HACKATHON_SUBMISSION.md
+demo_commands.sh
+show_localstack.sh
+
 # Project-specific sensitive files
 quantum-kd-simulator/.env.local
 quantum-kd-simulator/terraform/terraform.tfvars
