@@ -2,6 +2,44 @@
 
 A comprehensive AWS Lambda-based quantum key distribution simulator implementing the BB84 protocol for secure quantum cryptographic key generation and distribution.
 
+## 🏆 AWS Hackathon Submission
+
+**Solving Real-World Business Problem**: Post-quantum cryptography and secure key distribution for the quantum computing era.
+
+### ✅ AWS Requirements Compliance:
+- **🔧 Core Service**: AWS Lambda powers the entire BB84 quantum simulation engine
+- **⚡ Lambda Triggers**: API Gateway triggers Lambda functions for QKD simulations
+- **🔗 AWS Integrations**:
+  - **DynamoDB**: Session data storage with TTL
+  - **KMS**: Quantum key encryption and secure storage
+  - **CloudWatch**: Comprehensive logging and monitoring
+  - **API Gateway**: RESTful API interface
+
+### 🎯 Business Impact:
+- **Quantum-Safe Security**: Prepares organizations for post-quantum cryptography
+- **Eavesdropping Detection**: Quantum-guaranteed detection of security breaches
+- **Scalable Architecture**: Serverless design handles concurrent key generation
+- **Cost-Effective**: Pay-per-use model with automatic scaling
+
+## 🎬 Demo Video
+
+**📺 [Watch Demo Video](YOUR_YOUTUBE_URL_HERE)** *(3 minutes)*
+
+### Video Outline:
+1. **Problem Introduction** (30s): Post-quantum cryptography challenges
+2. **AWS Lambda Architecture** (60s): How Lambda powers the BB84 simulation
+3. **Live Demo** (90s): QKD simulation, eavesdropping detection, security dashboard
+
+## 📋 AWS Services Used
+
+| **Service** | **Purpose** | **Implementation** |
+|-------------|-------------|-------------------|
+| **🔧 AWS Lambda** | **Core Engine** | BB84 quantum simulation, protocol execution |
+| **🌐 API Gateway** | **API Interface** | RESTful endpoints, CORS, request validation |
+| **🗄️ DynamoDB** | **Data Storage** | Session data, TTL cleanup, scalable NoSQL |
+| **🔑 AWS KMS** | **Key Security** | Quantum key encryption, secure storage |
+| **📊 CloudWatch** | **Monitoring** | Structured logging, metrics, performance tracking |
+
 ## 🔬 Overview
 
 This project simulates the BB84 quantum key distribution protocol, allowing two parties (Alice and Bob) to establish a shared cryptographic key with quantum-guaranteed security. The simulator includes realistic quantum channel effects, eavesdropping detection, error correction, and privacy amplification.
@@ -16,18 +54,31 @@ This project simulates the BB84 quantum key distribution protocol, allowing two 
 - **AWS Integration**: Serverless architecture with DynamoDB storage and KMS encryption
 - **LocalStack Support**: Local development and testing environment
 
-## 🏗️ Architecture
+## 🏗️ AWS Serverless Architecture
 
 ```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   API Gateway   │───▶│  Lambda Handler  │───▶│   DynamoDB      │
-└─────────────────┘    └──────────────────┘    └─────────────────┘
-                                │
-                                ▼
-                       ┌──────────────────┐
-                       │   KMS Service    │
-                       └──────────────────┘
+│   Frontend      │    │   API Gateway    │    │   AWS Lambda    │
+│   React App     │───▶│   REST API       │───▶│   BB84 Engine   │
+└─────────────────┘    └──────────────────┘    └──────────────────┘
+                                                         │
+                       ┌─────────────────┐              │
+                       │   CloudWatch    │◀─────────────┤
+                       │   Monitoring    │              │
+                       └─────────────────┘              ▼
+                                                ┌──────────────────┐
+┌─────────────────┐                           │   DynamoDB       │
+│   AWS KMS       │◀──────────────────────────│   Session Store  │
+│   Key Encryption│                           └──────────────────┘
+└─────────────────┘
 ```
+
+### 🔧 AWS Services Used:
+- **⚡ AWS Lambda**: Core quantum simulation engine (BB84 protocol)
+- **🌐 API Gateway**: RESTful API with CORS support
+- **🗄️ DynamoDB**: Session data storage with 24-hour TTL
+- **🔑 AWS KMS**: Quantum key encryption and secure storage
+- **📊 CloudWatch**: Structured logging and performance monitoring
 
 ### Components
 

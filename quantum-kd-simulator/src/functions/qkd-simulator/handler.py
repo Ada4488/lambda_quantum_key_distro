@@ -156,37 +156,44 @@ class BB84Protocol:
 
     def privacy_amplification(self, corrected_key: List[int], bits_disclosed_qber: int, bits_disclosed_ec: int) -> List[int]:
         current_length = len(corrected_key)
-        total_bits_considered_leaked = bits_disclosed_qber + bits_disclosed_ec
 
-        # Theoretical minimum length after PA: current_length - total_bits_considered_leaked
-        # However, we also have a target final key length.
-        
-        # If too many bits leaked, we might not reach target or even get a useful key.
-        if current_length <= total_bits_considered_leaked:
-            logger.warning(f"Not enough bits ({current_length}) for privacy amplification after accounting for {total_bits_considered_leaked} disclosed bits.")
+        # Note: bits_disclosed_qber were already removed during QBER estimation
+        # The corrected_key already has those bits removed, so we only need to account for EC disclosure
+        # and any additional security margin for privacy amplification
+
+        # For privacy amplification, we need to account for:
+        # 1. Information leaked during error correction (bits_disclosed_ec)
+        # 2. Additional security margin (conservative approach)
+
+        # In real QKD, privacy amplification removes bits based on the total information
+        # that could have been leaked to an eavesdropper. For simulation, we'll use
+        # a conservative approach: remove EC disclosure + small security margin
+
+        security_margin = max(1, int(current_length * 0.1))  # 10% security margin
+        total_bits_to_remove = bits_disclosed_ec + security_margin
+
+        # If too many bits need to be removed, we might not get a useful key
+        if current_length <= total_bits_to_remove:
+            logger.warning(f"Not enough bits ({current_length}) for privacy amplification after accounting for {total_bits_to_remove} bits (EC: {bits_disclosed_ec}, margin: {security_margin}).")
             return []
 
-        # The number of bits to extract after PA.
-        # Should be less than current_length - total_bits_considered_leaked.
-        # And also capped by self.target_final_key_length.
-        
-        # A simple PA: truncate/hash. For simulation, truncate.
-        # Effective length from which we can draw secure bits:
-        secure_bits_pool_len = current_length - total_bits_considered_leaked
-        
+        # Calculate the secure key length after privacy amplification
+        secure_bits_pool_len = current_length - total_bits_to_remove
+
+        # Final key length is the minimum of what's available and what's requested
         final_key_len = min(secure_bits_pool_len, self.target_final_key_length)
 
         if final_key_len <= 0:
             logger.warning("Privacy amplification resulted in zero or negative key length.")
             return []
-        
+
         # Take the first `final_key_len` bits. (Hashing would be better in reality)
         amplified_key = corrected_key[:final_key_len]
-        
+
         if len(amplified_key) < self.target_final_key_length:
             logger.warning(f"Privacy amplification resulted in a key shorter ({len(amplified_key)}) than target ({self.target_final_key_length}).")
-        
-        logger.info(f"Privacy amplification performed. Final key length: {len(amplified_key)}.")
+
+        logger.info(f"Privacy amplification performed. Removed {total_bits_to_remove} bits (EC: {bits_disclosed_ec}, margin: {security_margin}). Final key length: {len(amplified_key)}.")
         return amplified_key
 
 @tracer.capture_lambda_handler
