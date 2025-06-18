@@ -23,7 +23,7 @@ A comprehensive AWS Lambda-based quantum key distribution simulator implementing
 
 ## 🎬 Demo Video
 
-**📺 [Watch Demo Video](YOUR_YOUTUBE_URL_HERE)** *(3 minutes)*
+**📺 [Watch Demo Video](https://youtu.be/bUqpaiKkFgo)** *(3 minutes)*
 
 ### Video Outline:
 1. **Problem Introduction** (30s): Post-quantum cryptography challenges
